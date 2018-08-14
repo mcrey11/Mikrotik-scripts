@@ -30,16 +30,17 @@ $send text=(“Hi!”)
 $send text=(“How are you?”)
 ```
 </br>
-In the case if none destination chat set messages will be sent into the default chat (set in the **tg_config**).</br>
-To add your own commands to bot just add new command to bot (**/setcommands** in @BotFather ) and create script named
-tg_cmd_*command*.</br>
-As example see **/hi** and **/health** bot commands (scripts **tg_cmd_hi** and **tg_cmd_health**).</br>
+In the case if none destination chat set messages will be sent into the default chat (set in the tg_config).</br>
+To add your own commands to bot just add new command to bot (/setcommands in @BotFather ) and create script named
+tg_cmd_*command*.
+</br>
+As example see /hi and /health bot commands (scripts tg_cmd_hi and tg_cmd_health).</br>
 </br>
 More information can be read here:</br>
 https://www.coders.in.ua/2017/12/05/telegram-bot-mikrotik/</br>
 https://forum.mikrotik.com/viewtopic.php?f=9&t=128394</br>
 </br>
-PS: but one thing should be kept in mind - annoying logging of **/tool fetch** command to Log which can't be switched off ^(</br>
+PS: but one thing should be kept in mind - annoying logging of /tool fetch command to Log which can't be switched off ^(</br>
 It is not problem if you call fetch few times in the day but problem if every minute (checking updates from Telegram) - log is filled by dummy and useless information ^(</br>
 It is the reason why Telegram task in Scheduler disabled by default.</br>
 But even in this case tg_sendMessage command can be very useful - to send notification to Telegram when something happens on router (new pptp session established, new Wi-Fi user connected or somebody logged to router).</br>
