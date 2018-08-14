@@ -4,24 +4,24 @@
 
 **vpn-tunnel-check** :
 
-_gw_ – what to ping
-_cnt2ping_ – how much too ping
-_minlevel_ – minimum allowed successful ping to count channel alive
+_gw_ – what to ping</br>
+_cnt2ping_ – how much too ping</br>
+_minlevel_ – minimum allowed successful ping to count channel alive</br>
 
 **vpn-interfaces** :
 
-_imask_ – mask for switched channels. For example “^VPN*” means channels, starting from “VPN” in their name.
-_delayBeforeChecks_ – delay between enabling of channel and starting it’s health check.
-
-_checkIfRunning_ – will we check “running” status. Makes sense for pptp/l2tp.
-_runningDelay_ – delays between “running” checks
-_runningMaxCount_ – how long we will wait for “running”=true
-
-_checkIfPing_ – will we check health of channel by pinging.
-_checkPing2Interface_ – will we specify interface during ping. I.e. will we ping via concrete interface.
-_ping2host_ – host to be pinged
-_pingMaxCount_ – how much to ping
-_pingMinCount_ – minimal successful pings to count channel alive
+_imask_ – mask for switched channels. For example “^VPN*” means channels, starting from “VPN” in their name.</br>
+_delayBeforeChecks_ – delay between enabling of channel and starting it’s health check.</br>
+</br>
+_checkIfRunning_ – will we check “running” status. Makes sense for pptp/l2tp.</br>
+_runningDelay_ – delays between “running” checks</br>
+_runningMaxCount_ – how long we will wait for “running”=true</br>
+</br>
+_checkIfPing_ – will we check health of channel by pinging.</br>
+_checkPing2Interface_ – will we specify interface during ping. I.e. will we ping via concrete interface.</br>
+_ping2host_ – host to be pinged</br>
+_pingMaxCount_ – how much to ping</br>
+_pingMinCount_ – minimal successful pings to count channel alive</br>
 
 ### 2. Check scripts vpn-tunnel-check and vpn-interfaces by running them from terminal.
 
