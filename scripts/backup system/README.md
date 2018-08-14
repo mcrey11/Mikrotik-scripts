@@ -6,6 +6,6 @@ Backup system for Mikrotik's router.</br>
 3. Tries send via FTP
 4. Creates backups log and sends it via Mail
 
-More detailes can be read here:</br>
+More details can be read here:</br>
 https://www.coders.in.ua/2017/08/30/backup-system-v1-4/</br>
 https://www.microtik.com/viewtopic.php?f=9&t=125072&p=615948
