@@ -13,7 +13,7 @@ After successful import you will see 4 scripts in _System_->_Scripts_:
   - **certs_createServer** - create server's certificate
   - **certs_createClient** - create client's certificate
 
-### 2. Generate server realated certificaets:
+### 2. Generate server certificate:
 Run in WinBox terminal:
    ```bash
    /system script run certs_createCA   
@@ -21,7 +21,9 @@ Run in WinBox terminal:
    ```
 You will get self-signed CA certificate and server certificate signed by created CA with defaults set in _certs_defaults_.
 You should specify server (not CA!) certificate in OVPN Server settings.
-If you decide also you client's certificates for authorization - set _Require Client Certificate_ checkbox.
+
+### 3. Generate, import and use client's certificates
+If you decide to use client's certificates for authorization - set _Require Client Certificate_ checkbox.
 For each OpenVPN client who needs own certificate run:
    ```bash
    /system script run certs_createClient
@@ -32,4 +34,4 @@ If client also Mikrotik based - just import certificates in order:
 * CA certificate
 * client's crt file
 * client's key file (don't forget specify private key password!)
-and mention imported client's certificate in OVPN clint connection.
+and specify imported client's certificate in OVPN client connection settings.
