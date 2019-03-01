@@ -3,7 +3,7 @@
 ROS API wrapper with some security added (in future)
 
 ## Features
-- [x] router device can be pre-configued - config/credentials stored separatly and can be accessed from client's code
+- [x] router device can be pre-configured - config/credentials stored separatly and can be accessed from client's code
 - [x] API wrapped in black-box style - i.e. inside client's code you can just receive context of desired router 
       and do only listed for this router actions i.e. no full control on router given. 
       ROS have rediculus persmissions controls for router users.  
