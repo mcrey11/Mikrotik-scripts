@@ -30,14 +30,26 @@ class TestStringMethods(unittest.TestCase):
     #    self.assertTrue ( router!=None )
     #    router.disconnect()
 
-    def test_RouterPrimary_RO_connect(self): #router cert check
+    #def test_RouterPrimary_RO_connect(self): #router cert check
+    #    router = secureROS.getRouter("Primary",True);
+    #    self.assertTrue ( router!=None )
+    #    router.disconnect()
+
+    #def test_RouterPrimary_RW_connect(self): #router cert check
+    #    router = secureROS.getRouter("Primary",False);
+    #    self.assertTrue ( router!=None )
+    #    router.disconnect()
+
+    #def test_RouterPrimary_RO_console(self): #router cert check
+    #    router = secureROS.getRouter("Primary",True);
+    #    self.assertTrue ( router!=None )
+    #    router.console()
+    #    router.disconnect()
+
+    def test_RouterPrimary_RO_console(self): #router cert check
         router = secureROS.getRouter("Primary",True);
         self.assertTrue ( router!=None )
-        router.disconnect()
-
-    def test_RouterPrimary_RW_connect(self): #router cert check
-        router = secureROS.getRouter("Primary",False);
-        self.assertTrue ( router!=None )
+        router.get_AddressListItems("Blacklist")
         router.disconnect()
 
 if __name__ == '__main__':

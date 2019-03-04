@@ -2,8 +2,8 @@ import os, sys
 import logger
 import ssl
 import json
-from librouteros import connect
-from librouteros.login import login_plain, login_token
+from libs.librouteros.librouteros import connect
+from libs.librouteros.librouteros.login import login_plain, login_token
 
 #try:
 #    import logger
@@ -16,6 +16,11 @@ from librouteros.login import login_plain, login_token
 
 log    = logger.log
 logger = logger.logger
+
+## helper
+def cmd_not_impl(object,cmd,args=None):
+    return "*{}* : `{}` not impelmented".format(object,cmd)
+
 
 class RouterContext:
     api = None
@@ -97,9 +102,42 @@ class RouterContext:
             mod = sys.modules[self.__module__]
         return config
 
+#    @log
+#    @command("/")
+#    def get_AddressListItems(self,cmd,args=None):
+#        return cmd_not_impl(self,cmd,args)
+
     @log
-    def cmd_status(self,object,cmd,args=None):
-        return cmd_not_impl(object,cmd,args)
+    def console(self):
+        print("Enter /quit to exit console mode!")
+        while True:
+            text=input("#>")
+            if text=="/quit":
+                break
+            if self.api and text:
+                try:
+                    res=self.api(cmd=text)
+                except Exception as inst:
+                    print("ERROR: {}".format(str(inst)))
+                else:
+                    if res:
+                        print(res)
+
+
+    @log
+    def get_AddressListItems(self,addresListName):
+        if not self.api:
+            return None
+        try:
+            params = {'?=list': addresListName}
+            #res=self.api(cmd="/ip/firewall/address-list/print")
+            res=self.api(cmd="/ip/firewall/address-list/print",**params)
+        except Exception as inst:
+            print("ERROR: {}".format(str(inst)))
+        else:
+            if res:
+                    print(res)
+
 
 @log
 def getRouter(rid,readonly=True):
