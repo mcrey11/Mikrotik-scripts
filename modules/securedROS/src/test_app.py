@@ -54,7 +54,11 @@ class TestStringMethods(unittest.TestCase):
 
     def test_parse(self): 
         #expr="NOT A==4 ANND A==123 OR C!=D" #error
-        expr="Not HaS A AND (A==123 And C!=D or has 'B' )"
+        #expr="Not HaS A AND (A==123 And B==321 AND C!=D or has 'B' )"
+        #expr="type=='ether' or type=='vlan'"
+        #expr="has type and type=='ether' or type=='vlan'"
+        #expr="has type and (type=='ether' or type!='vlan')"
+        expr="has type and type=='ether' and type!='vlan'"
         print(secureROS.RouterContext.parse(expr))
 
 if __name__ == '__main__':

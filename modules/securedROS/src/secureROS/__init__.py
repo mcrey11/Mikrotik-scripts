@@ -144,6 +144,43 @@ class RouterContext:
     def parse(s) -> list:
         #expr = pp.Forward()
 
+        def call_op_Unary(tokens):
+            res=""
+            op, v = tokens[0]
+            if op=="HAS":
+                res="?{}\n".format(v)
+            elif op=="NOT":
+                res=res+"?#!".format(v)
+            else:
+                raise
+            return res
+
+        def call_op_Binary(tokens):
+            res=""
+            a,op,b=tokens[0][:3]
+            if op=='==':
+                res="?={}={}\n".format(a,b)
+            elif op=="!=":
+                res="?={}={}\n?#!\n".format(a,b)
+            elif op=="<":
+                res="?<{}={}\n".format(a,b)
+            elif op==">":
+                res="?>{}={}\n".format(a,b)
+            elif op=="<=":
+                res="?>{}={}\n?#!\n".format(a,b)
+            elif op==">=":
+                res="?<{}={}\n?#!\n".format(a,b)
+            elif op=="AND" or op=="OR": #can be more than 3 tokens!
+                if op=="AND": 
+                    o="?#&\n"
+                elif op=="OR": 
+                    o="?#|\n"
+                res="".join(tokens[0][0::2])+o*((len(tokens[0])-1)//2)
+            else:
+                raise
+
+            return res
+
         number     = pp.Word(pp.nums)
         #number    = pp.Regex(r"[+-]?\d+(:?\.\d*)?(:?[eE][+-]?\d+)?")
         string     = pp.dblQuotedString | pp.sglQuotedString
@@ -154,11 +191,11 @@ class RouterContext:
         operator        = pp.Regex(">=|<=|!=|>|<|==").setName("operator")
         
         expr = pp.operatorPrecedence(operand,[
-                                            (pp.CaselessKeyword("HAS"), 1, pp.opAssoc.RIGHT),
-                                            (operator,                  2, pp.opAssoc.LEFT),
-                                            (pp.CaselessKeyword("NOT"), 1, pp.opAssoc.RIGHT),
-                                            (pp.CaselessKeyword("AND"), 2, pp.opAssoc.LEFT),
-                                            (pp.CaselessKeyword("OR"),  2, pp.opAssoc.LEFT),
+                                            (pp.CaselessKeyword("HAS"), 1, pp.opAssoc.RIGHT, call_op_Unary),
+                                            (operator,                  2, pp.opAssoc.LEFT,  call_op_Binary),
+                                            (pp.CaselessKeyword("NOT"), 1, pp.opAssoc.RIGHT, call_op_Unary),
+                                            (pp.CaselessKeyword("AND"), 2, pp.opAssoc.LEFT,  call_op_Binary),
+                                            (pp.CaselessKeyword("OR"),  2, pp.opAssoc.LEFT,  call_op_Binary),
                                                ])
 
         try:
@@ -167,7 +204,7 @@ class RouterContext:
             logger.error("Failed to parse: {}\n{}".format(s, str(inst)))
             return None
 
-        return res.asList()
+        return res[0]
 
 @log
 def getRouter(rid,readonly=True):
