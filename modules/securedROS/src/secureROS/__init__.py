@@ -2,6 +2,7 @@ import os, sys
 import logger
 import ssl
 import json
+import pyparsing as pp
 from libs.librouteros.librouteros import connect
 from libs.librouteros.librouteros.login import login_plain, login_token
 
@@ -138,6 +139,35 @@ class RouterContext:
             if res:
                     print(res)
 
+    @staticmethod
+    @log 
+    def parse(s) -> list:
+        #expr = pp.Forward()
+
+        number     = pp.Word(pp.nums)
+        #number    = pp.Regex(r"[+-]?\d+(:?\.\d*)?(:?[eE][+-]?\d+)?")
+        string     = pp.dblQuotedString | pp.sglQuotedString
+        identifier = pp.Word(pp.alphas+".", pp.alphanums + "_")
+        
+        operand = identifier | number | string
+
+        operator        = pp.Regex(">=|<=|!=|>|<|==").setName("operator")
+        
+        expr = pp.operatorPrecedence(operand,[
+                                            (pp.CaselessKeyword("HAS"), 1, pp.opAssoc.RIGHT),
+                                            (operator,                  2, pp.opAssoc.LEFT),
+                                            (pp.CaselessKeyword("NOT"), 1, pp.opAssoc.RIGHT),
+                                            (pp.CaselessKeyword("AND"), 2, pp.opAssoc.LEFT),
+                                            (pp.CaselessKeyword("OR"),  2, pp.opAssoc.LEFT),
+                                               ])
+
+        try:
+            res = expr.parseString( s, parseAll=True )
+        except Exception as inst:
+            logger.error("Failed to parse: {}\n{}".format(s, str(inst)))
+            return None
+
+        return res.asList()
 
 @log
 def getRouter(rid,readonly=True):
@@ -150,3 +180,5 @@ def getRouter(rid,readonly=True):
         logger.error(inst)
         return None
     return None if context.api==None else context
+
+
