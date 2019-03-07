@@ -47,6 +47,12 @@ class RosAPIObject(object):
         while obj.name!="root":
             cmd="/"+obj.name+cmd
             obj=obj.parent
+        # normailze name accoring to dict:
+        XLAT = {
+                "__" : "-",
+                }
+        for k,v in XLAT.items():
+            cmd=cmd.replace(k,v)
         return obj.do( cmd, *args, **kwargs )
 
 class RouterContext(object):
@@ -171,8 +177,7 @@ class RouterContext(object):
             #logger.debug("Attribute error: {}".format(name))
             raise AttributeError
         logger.debug("GETATTR {}->{}".format(self.name,name))
-        r=RosAPIObject(self, name)
-        return r
+        return RosAPIObject(self, name)
 
     @log
     def do(self, text, where=None, **kwargs):
@@ -185,6 +190,7 @@ class RouterContext(object):
             res=self.api(cmd=text, where=where, **kwargs)
         except Exception as inst:
             logger.error(str(inst))
+            res="ERROR: {}".format(str(inst))
         return res
 
 @log

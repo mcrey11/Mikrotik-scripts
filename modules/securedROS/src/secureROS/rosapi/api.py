@@ -134,7 +134,8 @@ class Composer:
             res = expr.parseString( s, parseAll=True )
         except Exception as inst:
             logger.error("Failed to parse: {}\n{}".format(s, str(inst)))
-            return None
+            raise
+            #return None
 
         return res[0].split()
 

@@ -4,6 +4,13 @@ import unittest
 import sys
 import secureROS
 
+def printres(res):
+    if type(res)==list or type(res)==tuple:
+        for r in res: 
+            print(r)
+    else:
+        print(res)
+
 class TestStringMethods(unittest.TestCase):
 
     #def test_noRouter(self):
@@ -60,14 +67,13 @@ class TestStringMethods(unittest.TestCase):
     def test_RouterPrimary_RO_console(self):
         router = secureROS.getRouter("Primary",True);
         self.assertTrue ( router!=None )
-        #router.get_AddressListItems("Blacklist")
+        #res=router.do("/ip/firewall/address-list/print", where="list==Blacklist")
+        res=router.ip.firewall.address__list.print(where="list==Blacklist") # TRICK: '__' means "-" here. "-" cannot be used in Python directly names but in ROS can
         #res=router.ip.route.print(where="dynamic==true")
-        res=router.ip.route.print(where="not has dynamic and dst-address=='0.0.0.0/0'") # here is some of ROS stranges - route has dynamic=yes for dynamic routes and hasn't attribute "dynamic" in other cases. I.e. dynamic=no impossible %)
-        if type(res)==list or type(res)==tuple:
-            for r in res: print(r)
-        else:
-            print(res)
+        #res=router.ip.route.print(where="not has dynamic and dst-address=='0.0.0.0/0'") # here is some of ROS stranges - route has dynamic=yes for dynamic routes and hasn't attribute "dynamic" in other cases. I.e. dynamic=no impossible %)
+        printres(res)
         router.disconnect()
+
     #def test_parse(self): 
     #    #expr="NOT A==4 ANND A==123 OR C!=D" #error
     #    #expr="Not HaS A AND (A==123 And B==321 AND C!=D or has 'B' )"
