@@ -19,9 +19,9 @@ class _DummyLogger():
             print("WARNING: {}".format(msg))
 
 logger = _DummyLogger(True); 
-
-debug = False
+debug  = False
 logger_handlers = []
+inited = False
 
 def getLoggerName():
     return "securerosapi"
@@ -38,11 +38,13 @@ def log(func):
 
 def initLogger(fdebug=False):
         global logger
+        global inited
         global logger_handlers
         global debug
 
-        #if logger!=None:
-        #    return
+        if inited:
+            return
+
         debug=False
         if hasattr(settings,"debug"):
             debug=fdebug or settings.debug

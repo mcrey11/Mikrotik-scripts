@@ -109,5 +109,3 @@ settings.py
 *.json
 *.crt
 *.pem
-3rd/
-libs/

@@ -20,12 +20,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="secureROS\logger.py" />
+    <Compile Include="secureROS\rosapi\api.py" />
+    <Compile Include="secureROS\rosapi\connections.py" />
+    <Compile Include="secureROS\rosapi\exceptions.py" />
+    <Compile Include="secureROS\rosapi\logger.py" />
+    <Compile Include="secureROS\rosapi\__init__.py" />
     <Compile Include="secureROS\settings.py" />
     <Compile Include="secureROS\__init__.py" />
     <Compile Include="test_app.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="secureROS" />
+    <Folder Include="secureROS\rosapi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="secureROS\routers.json" />
