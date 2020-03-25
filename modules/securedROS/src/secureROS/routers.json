@@ -1,0 +1,38 @@
+{
+ "0":
+  {
+	"name" : "CCR-UA-2 (Backup)",
+	"description" : "Backup router in UA",
+	"ip"   : "10.174.1.2",
+	"port" : 8729,
+	"api_ro_user"    : "api_ro", 
+	"api_ro_pass"    : "5GqUqu5ccm2v2C83S7gcxHH7",
+	"api_rw_user"    : "api_rw", 
+	"api_rw_pass"    : "JeNgHE4abucXjtWzGww72uJ3",
+	"api_ca_cert"    : null
+  },
+ "1":
+  {
+	"name" : "CCR-UA-2 (Backup)",
+	"description" : "Backup router in UA",
+	"ip"   : "10.174.1.2",
+	"port" : 8729,
+	"api_ro_user"    : "api_ro", 
+	"api_ro_pass"    : "5GqUqu5ccm2v2C83S7gcxHH7",
+	"api_rw_user"    : "api_rw", 
+	"api_rw_pass"    : "JeNgHE4abucXjtWzGww72uJ3",
+	"api_ca_cert"    : "ca0.crt"
+  },
+ "Primary":
+  {
+	"name" : "CCR-UA-1 (Primary)",
+	"description" : "Main router in UA office",
+	"ip"   : "10.174.2.1",
+	"port" : 8729,
+	"api_ro_user"    : "api_ro", 
+	"api_ro_pass"    : "-JpV@>?!#YD+WjBbL79@69CJ",
+	"api_rw_user"    : "api_rw", 
+	"api_rw_pass"    : "e%crcTGM_$b?hNkt2{~F4t=z",
+	"api_ca_cert"    : "cert_export_CA-Primary.crt"
+  }
+}	
